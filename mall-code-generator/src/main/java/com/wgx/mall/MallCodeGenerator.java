@@ -69,7 +69,8 @@ public class MallCodeGenerator {
         strategy.setEntityLombokModel(true);
         // 自动填充
         TableFill gmtCreate = new TableFill("create_time", FieldFill.INSERT);
-        TableFill modify = new TableFill("update_time", FieldFill.INSERT);
+        // 新建和更新这个字段的值都要自动填充
+        TableFill modify = new TableFill("update_time", FieldFill.INSERT_UPDATE);
         List<TableFill> tableFillList = new ArrayList<>();
         tableFillList.add(gmtCreate);
         tableFillList.add(modify);
