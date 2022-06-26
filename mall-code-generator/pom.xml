@@ -12,4 +12,24 @@
     <artifactId>mall-code-generator</artifactId>
 
 
+    <dependencies>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.10</version>
+        </dependency>
+
+        <!--  Velocity是一个基于java的模板引擎（template engine）。
+        它允许任何人仅仅简单的使用模板语言（template language）来引用由java代码定义的对象。-->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+            <version>2.0</version>
+        </dependency>
+    </dependencies>
 </project>
