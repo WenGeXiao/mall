@@ -1,7 +1,9 @@
 package com.wgx.mall.controller;
 
+import com.wgx.ums.entity.dto.UserMemberDTO;
 import com.wgx.ums.service.UmsMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,9 +22,9 @@ public class UmsMemberController {
     private UmsMemberService umsService;
 
     @RequestMapping("/register")
-    public String register(){
-
-        return "hello";
+    public String register(@RequestBody UserMemberDTO userMemberDTO){
+        String resData = umsService.register(userMemberDTO);
+        return resData;
     }
 }
 

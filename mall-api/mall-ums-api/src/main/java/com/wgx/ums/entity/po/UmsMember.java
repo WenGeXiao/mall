@@ -1,4 +1,4 @@
-package com.wgx.ums.entity;
+package com.wgx.ums.entity.po;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;

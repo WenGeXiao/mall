@@ -2,7 +2,7 @@ package com.wgx.mall.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.wgx.ums.entity.UmsMember;
+import com.wgx.ums.entity.po.UmsMember;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,5 +14,4 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UmsMemberMapper extends BaseMapper<UmsMember> {
-
 }
