@@ -1,13 +1,13 @@
-package com.wgxiao.mall;
+package com.wgx;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
-@MapperScan("com.wgxiao.mall.mapper")
-public class UmsApplication {
+@SpringBootApplication(scanBasePackages = {"com.wgx"})
+@MapperScan("com.wgx.mall.mapper")
+public class MallApplication {
     public static void main(String[] args) {
-        SpringApplication.run(UmsApplication.class, args);
+        SpringApplication.run(MallApplication.class, args);
     }
 }

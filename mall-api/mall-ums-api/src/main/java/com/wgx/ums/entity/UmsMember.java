@@ -1,4 +1,4 @@
-package com.wgxiao.mall.entity;
+package com.wgx.ums.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -16,7 +16,7 @@ import java.util.Date;
  * 后台用户表
  * </p>
  *
- * @author wgxiao
+ * @author wgx
  * @since 2022-06-26
  */
 @Data

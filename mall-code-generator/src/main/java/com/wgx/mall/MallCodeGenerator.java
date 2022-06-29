@@ -28,7 +28,7 @@ public class MallCodeGenerator {
         gc.setOutputDir(projectPath + File.separator + "mall-service" +
                 File.separator + "mall-service-ums" +
                 File.separator + "src" + File.separator + "main" + File.separator + "java" );
-        gc.setAuthor("wgxiao");
+        gc.setAuthor("wgx");
         // 是否文件覆盖
         gc.setFileOverride(true);
         // 去掉service前缀I
@@ -51,7 +51,7 @@ public class MallCodeGenerator {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("com.wgxiao.mall");
+        pc.setParent("com.wgx.mall");
         pc.setEntity("entity");
         pc.setMapper("mapper");
         pc.setController("controller");

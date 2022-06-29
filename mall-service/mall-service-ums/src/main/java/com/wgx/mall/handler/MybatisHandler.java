@@ -1,4 +1,4 @@
-package com.wgxiao.mall.handler;
+package com.wgx.mall.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
