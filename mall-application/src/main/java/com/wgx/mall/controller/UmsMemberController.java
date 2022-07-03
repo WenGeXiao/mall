@@ -3,9 +3,7 @@ package com.wgx.mall.controller;
 import com.wgx.ums.entity.dto.UserMemberDTO;
 import com.wgx.ums.service.UmsMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 用户管理系统controller
@@ -23,8 +21,12 @@ public class UmsMemberController {
 
     @RequestMapping("/register")
     public String register(@RequestBody UserMemberDTO userMemberDTO){
-        String resData = umsService.register(userMemberDTO);
-        return resData;
+        return umsService.register(userMemberDTO);
+    }
+
+    @RequestMapping("/login")
+    public String login(@RequestBody UserMemberDTO userMemberDTO){
+       return umsService.login(userMemberDTO.getUsername(), userMemberDTO.getPassword());
     }
 }
 

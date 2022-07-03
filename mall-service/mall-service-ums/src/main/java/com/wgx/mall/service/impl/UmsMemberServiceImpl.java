@@ -48,7 +48,6 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
         return "success";
     }
 
-
     private void encryPwd(UmsMember umsMember) {
         // 取出密码
         String pwd = umsMember.getPassword();
@@ -85,4 +84,21 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
         return count == 0;
     }
 
+    @Override
+    public String login(String username, String password) {
+        if(StringUtils.isEmpty(username) || StringUtils.isEmpty(password)){
+            return "username or password can not null !";
+        }
+        // 根据用户名去查询数据库，如果有没有返回，提示报错
+        QueryWrapper<UmsMember> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", username);
+        UmsMember umsMember = umsMemberMapper.selectOne(queryWrapper);
+        if(StringUtils.isEmpty(umsMember)){
+            return "username or password error !";
+        }else{
+            // 否则就是密码(方法自动把前端密码加密) 与 数据库的密码进行对比
+            return bCryptPasswordEncoder.matches(password, umsMember.getPassword()) ?
+                    "login success" : "username or password error !";
+        }
+    }
 }

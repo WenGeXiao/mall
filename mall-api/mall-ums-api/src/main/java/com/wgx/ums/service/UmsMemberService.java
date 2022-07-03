@@ -6,4 +6,6 @@ import com.wgx.ums.entity.po.UmsMember;
 
 public interface UmsMemberService extends IService<UmsMember> {
     String register(UserMemberDTO userMemberDT);
+
+    String login(String username, String password);
 }
