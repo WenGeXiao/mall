@@ -4,7 +4,10 @@ import com.wgx.result.ResponseResult;
 import com.wgx.ums.entity.dto.UserMemberDTO;
 import com.wgx.ums.service.UmsMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 用户管理系统controller
@@ -21,7 +24,7 @@ public class UmsMemberController {
     private UmsMemberService umsService;
 
     @RequestMapping("/register")
-    public ResponseResult register(@RequestBody UserMemberDTO userMemberDTO){
+    public ResponseResult register(@RequestBody @Validated UserMemberDTO userMemberDTO){
         return umsService.register(userMemberDTO);
     }
 

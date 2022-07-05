@@ -34,7 +34,6 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
 
     @Override
     public ResponseResult register(UserMemberDTO userMemberDTO) {
-        // todo 基本校验
         UmsMember umsMember = new UmsMember();
         BeanUtils.copyProperties(userMemberDTO, umsMember);
         // 业务校验
@@ -89,11 +88,6 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
 
     @Override
     public ResponseResult login(String username, String password) {
-        if(StringUtils.isEmpty(username) || StringUtils.isEmpty(password)){
-            return ResponseResult.builder().code(StateCodeEnum.USER_NAME_AND_PWD_CAN_NOT_NULL.getCode())
-                    .msg(StateCodeEnum.USER_NAME_AND_PWD_CAN_NOT_NULL.getMsg())
-                    .build();
-        }
         // 根据用户名去查询数据库，如果有没有返回，提示报错
         QueryWrapper<UmsMember> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", username);
