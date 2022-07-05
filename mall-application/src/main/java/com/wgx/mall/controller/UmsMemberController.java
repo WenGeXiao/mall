@@ -1,5 +1,6 @@
 package com.wgx.mall.controller;
 
+import com.wgx.result.ResponseResult;
 import com.wgx.ums.entity.dto.UserMemberDTO;
 import com.wgx.ums.service.UmsMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,12 @@ public class UmsMemberController {
     private UmsMemberService umsService;
 
     @RequestMapping("/register")
-    public String register(@RequestBody UserMemberDTO userMemberDTO){
+    public ResponseResult register(@RequestBody UserMemberDTO userMemberDTO){
         return umsService.register(userMemberDTO);
     }
 
     @RequestMapping("/login")
-    public String login(@RequestBody UserMemberDTO userMemberDTO){
+    public ResponseResult login(@RequestBody UserMemberDTO userMemberDTO){
        return umsService.login(userMemberDTO.getUsername(), userMemberDTO.getPassword());
     }
 }

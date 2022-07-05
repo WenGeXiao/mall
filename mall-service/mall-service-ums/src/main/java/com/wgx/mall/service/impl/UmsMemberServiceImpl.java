@@ -3,7 +3,9 @@ package com.wgx.mall.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wgx.enums.StateCodeEnum;
 import com.wgx.mall.mapper.UmsMemberMapper;
+import com.wgx.result.ResponseResult;
 import com.wgx.ums.entity.dto.UserMemberDTO;
 import com.wgx.ums.entity.po.UmsMember;
 import com.wgx.ums.service.UmsMemberService;
@@ -31,21 +33,22 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public String register(UserMemberDTO userMemberDTO) {
+    public ResponseResult register(UserMemberDTO userMemberDTO) {
         // todo 基本校验
         UmsMember umsMember = new UmsMember();
         BeanUtils.copyProperties(userMemberDTO, umsMember);
         // 业务校验
         if(!StringUtils.isEmpty(bussinessValidate(umsMember))){
-            return "用户名重复";
+            return ResponseResult.builder().code(StateCodeEnum.USER_NAME_REPEAT.getCode()).
+                    msg(StateCodeEnum.USER_NAME_REPEAT.getMsg()).data(null).build();
         }
         // 密码加密
         encryPwd(umsMember);
-        // todo: 公共响应
         // todo 异常处理
         // mybatis_plus返回的是主键id
-        int userId = umsMemberMapper.insert(umsMember);
-        return "success";
+        umsMemberMapper.insert(umsMember);
+        return ResponseResult.builder().code(StateCodeEnum.SUCCESS.getCode()).
+                msg("用户注册成功").data(null).build();
     }
 
     private void encryPwd(UmsMember umsMember) {
@@ -85,20 +88,26 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
     }
 
     @Override
-    public String login(String username, String password) {
+    public ResponseResult login(String username, String password) {
         if(StringUtils.isEmpty(username) || StringUtils.isEmpty(password)){
-            return "username or password can not null !";
+            return ResponseResult.builder().code(StateCodeEnum.USER_NAME_AND_PWD_CAN_NOT_NULL.getCode())
+                    .msg(StateCodeEnum.USER_NAME_AND_PWD_CAN_NOT_NULL.getMsg())
+                    .build();
         }
         // 根据用户名去查询数据库，如果有没有返回，提示报错
         QueryWrapper<UmsMember> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", username);
         UmsMember umsMember = umsMemberMapper.selectOne(queryWrapper);
         if(StringUtils.isEmpty(umsMember)){
-            return "username or password error !";
+            return ResponseResult.builder().code(StateCodeEnum.USER_NAME_OR_PWD_ERROR.getCode())
+                    .msg(StateCodeEnum.USER_NAME_OR_PWD_ERROR.getMsg()).build();
         }else{
             // 否则就是密码(方法自动把前端密码加密) 与 数据库的密码进行对比
             return bCryptPasswordEncoder.matches(password, umsMember.getPassword()) ?
-                    "login success" : "username or password error !";
+                    ResponseResult.builder().code(StateCodeEnum.SUCCESS.getCode()).
+                            msg("login success").data(null).build() :
+                    ResponseResult.builder().code(StateCodeEnum.USER_NAME_OR_PWD_ERROR.getCode())
+                            .msg(StateCodeEnum.USER_NAME_OR_PWD_ERROR.getMsg()).build();
         }
     }
 }
