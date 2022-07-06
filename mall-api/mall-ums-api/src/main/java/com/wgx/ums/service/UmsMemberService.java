@@ -9,4 +9,6 @@ public interface UmsMemberService extends IService<UmsMember> {
     ResponseResult register(UserMemberDTO userMemberDT);
 
     ResponseResult login(String username, String password);
+
+    ResponseResult updateUser(UserMemberDTO userMemberDTO);
 }

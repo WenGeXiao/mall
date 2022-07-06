@@ -2,6 +2,7 @@ package com.wgx.mall.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wgx.enums.StateCodeEnum;
 import com.wgx.mall.mapper.UmsMemberMapper;
@@ -105,5 +106,15 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
             return ResponseResult.builder().code(StateCodeEnum.USER_NAME_OR_PWD_ERROR.getCode())
                     .msg(StateCodeEnum.USER_NAME_OR_PWD_ERROR.getMsg()).build();
         }
+    }
+
+    @Override
+    public ResponseResult updateUser(UserMemberDTO userMemberDTO) {
+        UmsMember umsMember = new UmsMember();
+        BeanUtils.copyProperties(userMemberDTO, umsMember);
+        UpdateWrapper updateWrapper = new UpdateWrapper();
+         updateWrapper.eq("username", userMemberDTO.getUsername());
+        umsMemberMapper.update(umsMember, updateWrapper);
+        return ResponseResult.builder().code(StateCodeEnum.SUCCESS.getCode()).msg("更新成功").build();
     }
 }
