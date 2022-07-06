@@ -1,7 +1,6 @@
 package com.wgx.mall.util;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 
 import java.util.Calendar;
@@ -55,15 +54,10 @@ public class JwtUtil {
      * @return
      * @throws Exception
      */
-    public static String parseToken(String token) {
-        try {
-            Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
-            if (claims != null) {
-                return claims.getSubject();
-            }
-        } catch (ExpiredJwtException e) {
-            e.printStackTrace();
-            System.out.println("jwt过期了");
+    public static String parseToken(String token){
+        Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+        if (claims != null) {
+            return claims.getSubject();
         }
         return "";
     }

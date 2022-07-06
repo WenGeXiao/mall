@@ -12,7 +12,8 @@ public enum StateCodeEnum {
    /**************** 用户 **************/
     USER_NAME_REPEAT(100, "用户名重复"),
     USER_NAME_AND_PWD_CAN_NOT_NULL(101, "username or password can not null !"),
-    USER_NAME_OR_PWD_ERROR(102, "username or password error!");
+    USER_NAME_OR_PWD_ERROR(102, "username or password error!"),
+    TOKEN_ERROR(103, "token error or null");
     private int  code;
     private String msg;
     // 枚举构造函数不允许public修饰符
