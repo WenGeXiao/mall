@@ -4,9 +4,13 @@ import com.wgx.annotation.TokenCheck;
 import com.wgx.result.ResponseResult;
 import com.wgx.ums.entity.dto.UserMemberDTO;
 import com.wgx.ums.service.UmsMemberService;
+import com.wgx.util.SignUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 用户管理系统controller
@@ -42,6 +46,14 @@ public class UmsMemberController {
     @RequestMapping("/testHttps")
     public String testHttps(){
         return "https test";
+    }
+
+    @GetMapping
+    @RequestMapping("/testParam")
+    public String testParam(String username, String sign){
+        Map<String, Object> map = new HashMap<>(1);
+        map.put("username", username);
+        return SignUtil.checkSign(map, sign) ? "success" : "fail";
     }
 }
 
