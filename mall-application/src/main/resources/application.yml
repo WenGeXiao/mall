@@ -1,5 +1,13 @@
 server:
   port: 8080
+  ssl:
+    key-store: classpath:dongbao-alias.keystore
+    # java key store = JKS
+    key-store-type: JKS
+    # 生成key-sotre的指定了别名的
+    key-alias: dongbao-alias
+    key-password: 123456
+    key-store-password: 123456
 spring:
   #数据库配置
   datasource:
@@ -9,4 +17,3 @@ spring:
     username: root
     password: 123456
     driver-class-name:  com.mysql.cj.jdbc.Driver
-
