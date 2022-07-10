@@ -1,10 +1,9 @@
 package com.wgx.mall.exception.define;
 
-
-public class TokenException extends RuntimeException {
+public class SignException extends RuntimeException{
     private String message;
 
-    public TokenException(String message) {
+    public SignException(String message) {
         this.message = message;
     }
 
