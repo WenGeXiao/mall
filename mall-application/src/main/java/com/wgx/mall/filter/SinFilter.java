@@ -2,6 +2,7 @@ package com.wgx.mall.filter;
 
 import com.alibaba.fastjson.JSONObject;
 import com.wgx.mall.util.HttpParamsUtil;
+import com.wgx.mall.wrapper.BodyReaderHttpServletRequestWrapper;
 import com.wgx.util.SignUtil;
 
 import javax.servlet.*;
@@ -23,7 +24,7 @@ public class SinFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         // 过滤器从输入流中获取了数据过后，无法重新获取输入流的数据，所以需要装饰request
-        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        HttpServletRequest httpServletRequest = new BodyReaderHttpServletRequestWrapper((HttpServletRequest)request);
         HttpServletResponse httpServletResponse = (HttpServletResponse)response;
         Map<String, Object> sortedMap = HttpParamsUtil.getAllParams(httpServletRequest);
         // 校验
